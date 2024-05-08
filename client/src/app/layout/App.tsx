@@ -1,18 +1,13 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import Header from "./Header";
-import { useState, useEffect } from "react";
-import { Product } from "../models/product";
-import ProductList from "../../features/product/ProductList";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
-
   const theme = createTheme({
     palette: {
       background: {
@@ -26,7 +21,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <ProductList products={products} />
+        <Container>
+          <Outlet />
+        </Container>
       </ThemeProvider>
     </>
   );

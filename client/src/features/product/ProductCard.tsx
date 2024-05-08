@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Product } from "../../app/models/product";
 import { ShoppingCartRounded } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 interface Props {
   product: Product;
@@ -16,7 +17,7 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/product/${product.id}`}>
         <CardHeader
           title={product.name}
           titleTypographyProps={{
