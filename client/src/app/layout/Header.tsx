@@ -1,6 +1,6 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, IconButton, Toolbar, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -26,7 +26,14 @@ export default function Header() {
         >
           BookStore
         </Typography>
-        <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
+        <IconButton
+          component={Link}
+          to="/basket"
+          size="large"
+          edge="start"
+          color="inherit"
+          sx={{ mr: 2 }}
+        >
           <Badge badgeContent="4" color="secondary">
             <ShoppingCart />
           </Badge>
