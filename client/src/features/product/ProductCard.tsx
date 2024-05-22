@@ -8,26 +8,19 @@ import {
   Typography,
 } from "@mui/material";
 import { Product } from "../../app/models/product";
-import { ShoppingCartRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
-import { blue } from "@mui/material/colors";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { addBasketItemAsync } from "../basket/basketSlice";
+import { ShoppingCartRounded } from "@mui/icons-material";
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
-  const [loading, setLoading] = useState(false);
-
-  function handleAddItem(productId: number) {
-    setLoading(true);
-    agent.Basket.addItem(productId)
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
+  const { status } = useAppSelector((state) => state.basket);
+  const dispatch = useAppDispatch();
 
   return (
     <Card>
@@ -35,7 +28,7 @@ export default function ProductCard({ product }: Props) {
         <CardHeader
           title={product.name}
           titleTypographyProps={{
-            sx: { fontSize: 16, fontWeight: "bold" },
+            sx: { fontSize: 18, fontWeight: "bold" },
           }}
           align="center"
         />
@@ -46,17 +39,24 @@ export default function ProductCard({ product }: Props) {
         />
       </CardActionArea>
       <Divider />
-      <CardActions>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <LoadingButton
-          loading={loading}
-          onClick={() => handleAddItem(product.id)}
+          loading={status.includes("pendingAddItem" + product.id)}
+          onClick={() =>
+            dispatch(addBasketItemAsync({ productId: product.id }))
+          }
           size="small"
-          sx={{ mr: "100px" }}
         >
           <ShoppingCartRounded />
         </LoadingButton>
-        <Typography sx={{ color: blue[700] }} variant="h6">
-          ₱{product.price}
+        <Typography sx={{ marginRight: 1 }} variant="h6" color="blue">
+          ₱{product.price.toFixed(2)}
         </Typography>
       </CardActions>
     </Card>
