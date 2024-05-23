@@ -28,6 +28,7 @@ export default function Header() {
           component={NavLink}
           to="/"
           sx={{
+            fontWeight: "bold",
             color: "inherit",
             textDecoration: "none",
             "&:hover": {

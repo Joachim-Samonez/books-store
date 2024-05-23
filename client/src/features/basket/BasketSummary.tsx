@@ -29,9 +29,9 @@ export default function BasketSummary({ subtotal }: Props) {
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell colSpan={2}> {itemCount} item</TableCell>
+              <TableCell colSpan={2}> {itemCount} items</TableCell>
               <TableCell align="right">
-                ₱<b>{(subtotal / 100).toFixed(2)}</b>
+                ₱<b>{subtotal.toFixed(2)}</b>
               </TableCell>
             </TableRow>
             <TableRow>
@@ -43,7 +43,7 @@ export default function BasketSummary({ subtotal }: Props) {
             <TableRow>
               <TableCell colSpan={2}>Total</TableCell>
               <TableCell align="right">
-                ₱<b>{(subtotal / 100 + deliveryFee).toFixed(2)}</b>
+                ₱<b>{(subtotal + deliveryFee).toFixed(2)}</b>
               </TableCell>
             </TableRow>
           </TableBody>
