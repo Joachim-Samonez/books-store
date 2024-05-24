@@ -44,7 +44,12 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <Container sx={{ minHeight: 417 }}>
+        <Container
+          sx={{
+            display: "flex",
+            minHeight: "70.2vh",
+          }}
+        >
           <Outlet />
         </Container>
         <Footer />
