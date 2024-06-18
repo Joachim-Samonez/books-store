@@ -11,7 +11,6 @@ import { getCookie } from "../util/util";
 import agent from "../api/agent";
 import { useAppDispatch } from "../store/configureStore";
 import { setBasket } from "../../features/basket/basketSlice";
-import Footer from "./Footer";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -44,15 +43,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <Container
-          sx={{
-            display: "flex",
-            minHeight: "70.2vh",
-          }}
-        >
+        <Container>
           <Outlet />
         </Container>
-        <Footer />
       </ThemeProvider>
     </>
   );
